@@ -1,6 +1,21 @@
 let currentSong = new Audio();
-let songs = [];
+let songs=[];
 let currFolder;
+
+import fs from "fs";
+import path from "path";
+
+export default function handler(req, res) {
+    const songsDir = path.join(process.cwd(), "public", "songs");
+    
+    try {
+        let files = fs.readdirSync(songsDir);
+        let mp3Files = files.filter(file => file.endsWith(".mp3"));
+        res.status(200).json(mp3Files);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to read directory" });
+    }
+}
 
 function secondsToMinutesSeconds(seconds) {
     if (isNaN(seconds) || seconds < 0) {
@@ -14,18 +29,8 @@ function secondsToMinutesSeconds(seconds) {
 async function getSongs(folder) {
     currFolder = folder;
     try {
-        let response = await fetch(`http://127.0.0.1:5500/${folder}/`);
-        let text = await response.text();
-        let div = document.createElement("div");
-        div.innerHTML = text;
-        let as = div.getElementsByTagName("a");
-        let songList = [];
-        
-        for (let element of as) {
-            if (element.href.endsWith(".mp3")) {
-                songList.push(decodeURIComponent(element.href.split("/songs/")[1]));
-            }
-        }
+        let response = await fetch(`/api/songs`);
+        let songList = await response.json();
         return songList;
     } catch (error) {
         console.error("Error fetching songs:", error);
@@ -34,10 +39,10 @@ async function getSongs(folder) {
 }
 
 const playMusic = (track, pause = false) => {
-    currentSong.src = `/${currFolder}/` + track;
+    currentSong.src = `/songs/` + track;
     if (!pause) {
         currentSong.play();
-        document.querySelector("#play").src = "pause.svg";
+        document.querySelector("#play").src = "/img/pause.svg";
     }
     document.querySelector(".songinfo").innerHTML = track;
     document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
@@ -76,10 +81,10 @@ async function main() {
     document.querySelector("#play").addEventListener("click", () => {
         if (currentSong.paused) {
             currentSong.play();
-            document.querySelector("#play").src = "pause.svg";
+            document.querySelector("#play").src = "/img/pause.svg";
         } else {
             currentSong.pause();
-            document.querySelector("#play").src = "play.svg";
+            document.querySelector("#play").src = "/img/play.svg";
         }
     });
     
@@ -133,4 +138,3 @@ async function main() {
 }
 
 main();
-//HI Arsh
