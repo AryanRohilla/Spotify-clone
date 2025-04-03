@@ -3,7 +3,7 @@ import path from "path";
 
 export default function handler(req, res) {
     const songsDir = path.join(process.cwd(), "public", "songs");
-    
+
     try {
         let files = fs.readdirSync(songsDir);
         let mp3Files = files.filter(file => file.endsWith(".mp3"));

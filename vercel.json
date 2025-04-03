@@ -1,6 +1,7 @@
 {
     "routes": [
-      { "src": "/api/songs", "dest": "/songs" }
+      { "src": "/api/songs", "dest": "/api/songs.js" },
+      { "src": "/songs/(.*)", "dest": "/public/songs/$1" }
     ]
   }
   

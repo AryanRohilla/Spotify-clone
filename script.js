@@ -12,7 +12,7 @@ function secondsToMinutesSeconds(seconds) {
 
 async function getSongs() {
     try {
-        let response = await fetch("/api/songs"); // Fetch from API route
+        let response = await fetch("/api/songs"); // Fetch from serverless API
         let songList = await response.json();
         return songList;
     } catch (error) {
@@ -22,10 +22,10 @@ async function getSongs() {
 }
 
 const playMusic = (track, pause = false) => {
-    currentSong.src = `/songs/` + track; // Correct path for Vercel deployment
+    currentSong.src = `/songs/${track}`; // Ensure correct path
     if (!pause) {
         currentSong.play();
-        document.querySelector("#play").src = "/img/pause.svg";
+        document.querySelector("#play").src = "img/pause.svg";
     }
     document.querySelector(".songinfo").innerHTML = track;
     document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
@@ -43,14 +43,14 @@ async function main() {
     for (let song of songs) {
         songUL.innerHTML += `
             <li>
-                <img class="invert" src="music.svg" alt="">
+                <img class="invert" src="img/music.svg" alt="">
                 <div class="info">
                     <div>${song}</div>
                     <div>Artist</div>
                 </div>
                 <div class="playnow">
                     <span>Play Now</span>
-                    <img class="invert" src="play.svg" alt="">
+                    <img class="invert" src="img/play.svg" alt="">
                 </div>
             </li>`;
     }
@@ -64,10 +64,10 @@ async function main() {
     document.querySelector("#play").addEventListener("click", () => {
         if (currentSong.paused) {
             currentSong.play();
-            document.querySelector("#play").src = "/img/pause.svg";
+            document.querySelector("#play").src = "img/pause.svg";
         } else {
             currentSong.pause();
-            document.querySelector("#play").src = "/img/play.svg";
+            document.querySelector("#play").src = "img/play.svg";
         }
     });
 
@@ -104,16 +104,16 @@ async function main() {
 
     document.querySelector(".range input").addEventListener("change", (e) => {
         currentSong.volume = parseInt(e.target.value) / 100;
-        document.querySelector(".volume>img").src = currentSong.volume > 0 ? "volume.svg" : "mute.svg";
+        document.querySelector(".volume>img").src = currentSong.volume > 0 ? "img/volume.svg" : "img/mute.svg";
     });
 
     document.querySelector(".volume>img").addEventListener("click", (e) => {
-        if (e.target.src.includes("volume.svg")) {
-            e.target.src = "mute.svg";
+        if (e.target.src.includes("img/volume.svg")) {
+            e.target.src = "img/mute.svg";
             currentSong.volume = 0;
             document.querySelector(".range input").value = 0;
         } else {
-            e.target.src = "volume.svg";
+            e.target.src = "img/volume.svg";
             currentSong.volume = 0.1;
             document.querySelector(".range input").value = 10;
         }
