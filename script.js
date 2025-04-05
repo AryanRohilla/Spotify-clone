@@ -13,14 +13,34 @@ function secondsToMinutesSeconds(seconds) {
 
 async function getSongs() {
   return [
+    "Water - Diljit Dosanjh.mp3",
+    "Tich Button (Parahuna) - Kulwinder Billa.mp3",
+    "Jo Tum Mere Ho Anuv Jain 128 Kbps.mp3",
+    "Tere Layi - Nirvair Pannu.mp3",
+    "Tayyari Haan Di - Kulwinder Billa.mp3",
+    "Suniyan Suniyan - DjPunjab.Com.Se.mp3",
+    "Parindey - B Praak.mp3",
+    "Magic - Diljit Dosanjh.mp3",
+    "Do Vaari Jatt - Jordan Sandhu.mp3",
+    "Mera Mann.mp3",
+    "Udaarian - Satinder Sartaaj.mp3",
+    "Kamlee - Sarrb.mp3",
+    "Kulwinder Billa - Sangdi Sangdi.mp3",
+    "Kho Na Baithan - Kulwinder Billa.mp3",
+    "Ishq - Nirvair Pannu.mp3",
+    "Irshad - Kanwar Grewal.mp3",
+    "Dildarian - Kambi Rajpuria.mp3",
+    "College - Mankirt Aulakh.mp3",
+    "Akhiyan - Harkirat Sangha.mp3",
     "Beretta Amanraj Gill.mp3",
     "Chaaha Hai Tujhko.mp3",
     "Dhundle Dhundle - Bunny Johal.mp3",
     "Dil Tu Jaan Tu Gurnazar.mp3",
+    "Snowfall - Jordan Sandhu.mp3",
     "Humko Humise Chura Lo.mp3",
     "Jo Bhi Kasmein Raaz.mp3",
     "Main Agar Saamne.mp3",
-    "Tumhare_Siva_Full_Song_with_Lyrics_(getmp3.pro).mp3",
+    "Tumhare Siva.mp3",
     "Woh Ladki Bahut Yaad Aati  - Qayamat .mp3",
     "Zaroor – Aparshakti Khurana .mp3"
   ];
@@ -129,3 +149,31 @@ async function main() {
 }
 
 main();
+
+
+
+
+
+
+// It is not used in the code but it is a function to get songs from a folder using fetch API
+// // async function getSongs(folder) {
+//     currFolder = folder;
+//     try {
+//         let response = await fetch(http://127.0.0.1:5500/${folder}/);
+//         let text = await response.text();
+//         let div = document.createElement("div");
+//         div.innerHTML = text;
+//         let as = div.getElementsByTagName("a");
+//         let songList = [];
+        
+//         for (let element of as) {
+//             if (element.href.endsWith(".mp3")) {
+//                 songList.push(decodeURIComponent(element.href.split("/songs/")[1]));
+//             }
+//         }
+//         return songList;
+//     } catch (error) {
+//         console.error("Error fetching songs:", error);
+//         return [];
+//     }
+// }
