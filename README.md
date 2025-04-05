@@ -45,7 +45,7 @@ Spotify Clone is a web-based music player that replicates the core functionaliti
 ## 🚀 Installation & Usage
 ### 📥 Clone the Repository
 ```bash
-git clone https://github.com/your-username/spotify-clone.git
+git clone https://github.com/AryanRohilla/Spotify-clone.git
 ```
 
 ### 📂 Navigate to the Project Directory
